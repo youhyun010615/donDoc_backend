@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
-public class UsersController {
+@RequestMapping("/api/user")
+public class UserController {
 
     @GetMapping
     public List<Users> getUsers(){
