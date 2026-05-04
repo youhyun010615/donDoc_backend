@@ -23,3 +23,4 @@ public class Users {
     private Integer targetExpenseRatio;
     private LocalDateTime createdAt;
 }
+
