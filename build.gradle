@@ -31,9 +31,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	// ✨ 여기부터 추가! ✨
+	// ✨이거 추가
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	// ✨ 여기까지 추가! ✨
+
 }
 
 tasks.named('test') {
