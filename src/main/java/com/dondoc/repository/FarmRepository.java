@@ -1,5 +1,6 @@
 package com.dondoc.repository;
 
+import com.dondoc.dto.FarmMembers;
 import com.dondoc.dto.Farms;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,16 @@ public class FarmRepository {
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getObject("created_at", LocalDateTime.class)
+        ));
+    }
+
+    public List<FarmMembers> findAllMembers(){
+        String sql = "SELECT * FROM farm_members";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new FarmMembers(
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getLong("farm_id"),
+                rs.getObject("joined_at", LocalDateTime.class)
         ));
     }
 }
