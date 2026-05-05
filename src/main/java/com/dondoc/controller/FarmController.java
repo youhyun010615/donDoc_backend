@@ -2,6 +2,7 @@ package com.dondoc.controller;
 
 import com.dondoc.dto.FarmMembers;
 import com.dondoc.dto.Farms;
+import com.dondoc.repository.FarmRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +15,15 @@ import java.util.List;
 @RequestMapping("/api/farm")
 public class FarmController {
 
+    private final FarmRepository farmRepository;
+
+    public FarmController(FarmRepository farmRepository){
+        this.farmRepository = farmRepository;
+    }
+
     @GetMapping
     public List<Farms> getFarms() {
-        return Arrays.asList(
-                new Farms(1L, "KB농장", LocalDateTime.now()),
-                new Farms(2L, "신한농장", LocalDateTime.now()),
-                new Farms(3L, "우리농장", LocalDateTime.now())
-        );
+        return farmRepository.findAll();
     }
 
     @GetMapping("/members")
