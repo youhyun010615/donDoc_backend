@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Record {
+public class Recorde {
     private Long id;
     private Long userId;
     private Long categoryId;
