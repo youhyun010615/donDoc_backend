@@ -1,6 +1,6 @@
 package com.dondoc.repository;
 
-import com.dondoc.dto.MonthlyHistory;
+import com.dondoc.entity.MonthlyHistory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

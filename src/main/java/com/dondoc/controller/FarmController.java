@@ -1,7 +1,7 @@
 package com.dondoc.controller;
 
-import com.dondoc.dto.FarmMembers;
-import com.dondoc.dto.Farms;
+import com.dondoc.entity.FarmMember;
+import com.dondoc.entity.Farm;
 import com.dondoc.repository.FarmMemberRepository;
 import com.dondoc.repository.FarmRepository;
 import org.springframework.web.bind.annotation.*;
@@ -21,22 +21,22 @@ public class FarmController {
     }
 
     @GetMapping
-    public List<Farms> getFarms() {
+    public List<Farm> getFarms() {
         return farmRepository.findAll();
     }
 
     @GetMapping("/members")
-    public List<FarmMembers> getFarmMembers() {
+    public List<FarmMember> getFarmMembers() {
         return farmMemberRepository.findAll();
     }
 
     @PostMapping
-    public void createFarm(@RequestBody Farms farm){
+    public void createFarm(@RequestBody Farm farm){
         farmRepository.save(farm);
     }
 
     @PostMapping("/members")
-    public void createFarmMember(@RequestBody FarmMembers farmMember){
+    public void createFarmMember(@RequestBody FarmMember farmMember){
         farmMemberRepository.save(farmMember);
     }
 

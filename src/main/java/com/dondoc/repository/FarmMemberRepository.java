@@ -1,6 +1,6 @@
 package com.dondoc.repository;
 
-import com.dondoc.dto.FarmMembers;
+import com.dondoc.entity.FarmMember;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +14,9 @@ public class FarmMemberRepository {
 
     public FarmMemberRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
-    public List<FarmMembers> findAll(){
+    public List<FarmMember> findAll(){
         String sql = "SELECT * FROM farm_members";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new FarmMembers(
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new FarmMember(
                 rs.getLong("id"),
                 rs.getLong("user_id"),
                 rs.getLong("farm_id"),
@@ -24,7 +24,7 @@ public class FarmMemberRepository {
         ));
     }
 
-    public void save(FarmMembers farmMember) {
+    public void save(FarmMember farmMember) {
         String sql = "INSERT INTO farm_members (user_id, farm_id, joined_at) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, farmMember.getUserId(), farmMember.getFarmId(), farmMember.getJoinedAt());
     }
