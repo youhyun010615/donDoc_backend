@@ -1,9 +1,8 @@
 package com.dondoc.controller;
 
-import com.dondoc.entity.FarmMember;
-import com.dondoc.entity.Farm;
-import com.dondoc.repository.FarmMemberRepository;
-import com.dondoc.repository.FarmRepository;
+import com.dondoc.dto.FarmMembers;
+import com.dondoc.dto.Farms;
+import com.dondoc.service.FarmService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,32 +11,30 @@ import java.util.List;
 @RequestMapping("/api/farm")
 public class FarmController {
 
-    private final FarmRepository farmRepository;
-    private final FarmMemberRepository farmMemberRepository;
+    private final FarmService farmService;
 
-    public FarmController(FarmRepository farmRepository,  FarmMemberRepository farmMemberRepository){
-        this.farmRepository = farmRepository;
-        this.farmMemberRepository = farmMemberRepository;
+    public FarmController(FarmService farmService){
+        this.farmService = farmService;
     }
 
     @GetMapping
-    public List<Farm> getFarms() {
-        return farmRepository.findAll();
+    public List<Farms> getFarms() {
+        return farmService.getFarms();
     }
 
     @GetMapping("/members")
-    public List<FarmMember> getFarmMembers() {
-        return farmMemberRepository.findAll();
+    public List<FarmMembers> getFarmMembers() {
+        return farmService.getFarmMembers();
     }
 
     @PostMapping
-    public void createFarm(@RequestBody Farm farm){
-        farmRepository.save(farm);
+    public void createFarm(@RequestBody Farms farm){
+        farmService.createFarm(farm);
     }
 
     @PostMapping("/members")
-    public void createFarmMember(@RequestBody FarmMember farmMember){
-        farmMemberRepository.save(farmMember);
+    public void createFarmMember(@RequestBody FarmMembers farmMember){
+        farmService.createFarmMember(farmMember);
     }
 
 

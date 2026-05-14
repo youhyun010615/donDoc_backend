@@ -1,11 +1,9 @@
 package com.dondoc.controller;
 
-import com.dondoc.entity.Category;
-import com.dondoc.entity.MonthlyHistory;
-import com.dondoc.entity.Record;
-import com.dondoc.repository.CategoryRepository;
-import com.dondoc.repository.MonthlyHistoryRepository;
-import com.dondoc.repository.RecordRepository;
+import com.dondoc.dto.Categories;
+import com.dondoc.dto.MonthlyHistories;
+import com.dondoc.dto.Records;
+import com.dondoc.service.RecordService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,43 +12,39 @@ import java.util.List;
 @RequestMapping("/api/record")
 public class RecordController {
 
-    private final RecordRepository recordRepository;
-    private final MonthlyHistoryRepository monthlyHistoryRepository;
-    private final CategoryRepository categoryRepository;
+    private final RecordService recordService;
 
-    public RecordController(RecordRepository recordRepository, MonthlyHistoryRepository monthlyHistoryRepository, CategoryRepository categoryRepository){
-        this.recordRepository = recordRepository;
-        this.monthlyHistoryRepository = monthlyHistoryRepository;
-        this.categoryRepository = categoryRepository;
+    public RecordController(RecordService recordService){
+        this.recordService = recordService;
     }
 
     @GetMapping
-    public List<Record> getRecords() {
-        return recordRepository.findAll();
+    public List<Records> getRecords() {
+        return recordService.getRecords();
     }
 
     @GetMapping("/categories")
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
+    public List<Categories> getCategories() {
+        return recordService.getCategories();
     }
 
     @GetMapping("/monthly-history")
-    public List<MonthlyHistory> getMonthlyHistory() {
-        return monthlyHistoryRepository.findAll();
+    public List<MonthlyHistories> getMonthlyHistory() {
+        return recordService.getMonthlyHistories();
     }
 
     @PostMapping
-    public void createRecord(@RequestBody Record record){
-        recordRepository.save(record);
+    public void createRecord(@RequestBody Records record){
+        recordService.createRecord(record);
     }
 
     @PostMapping("/categories")
-    public void createCategory(@RequestBody Category category){
-        categoryRepository.save(category);
+    public void createCategory(@RequestBody Categories category){
+        recordService.createCategory(category);
     }
 
     @PostMapping("/monthly-history")
-    public void createMonthlyHistory(@RequestBody MonthlyHistory monthlyHistory){
-        monthlyHistoryRepository.save(monthlyHistory);
+    public void createMonthlyHistory(@RequestBody MonthlyHistories monthlyHistory){
+        recordService.createMonthlyHistory(monthlyHistory);
     }
 }

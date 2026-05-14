@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MonthlyHistory {
+public class MonthlyHistories {
     private Long id;
     private Long userId;
     private LocalDate targetMonth;
