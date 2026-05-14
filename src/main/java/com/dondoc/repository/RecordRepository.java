@@ -33,4 +33,8 @@ public class RecordRepository {
         ));
     }
 
+    public void save(Records record) {
+        String sql = "INSERT INTO records (user_id, category_id, amount, description, memo, record_date, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, record.getUserId(), record.getCategoryId(), record.getAmount(), record.getDescription(), record.getMemo(), record.getRecordDate(), record.getCreatedAt());
+    }
 }

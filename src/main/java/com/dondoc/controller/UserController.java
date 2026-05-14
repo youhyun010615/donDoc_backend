@@ -2,14 +2,13 @@ package com.dondoc.controller;
 
 import com.dondoc.dto.Users;
 import com.dondoc.repository.UserRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+// ddddd
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -23,5 +22,12 @@ public class UserController {
     @GetMapping
     public List<Users> getUsers(){
         return userRepository.findAll();
+    }
+
+    // PostMapping - POST 요청을 받는 엔드포인트
+    // @RequestBody - 요청 body의 JSON을 Users 객체로 변환
+    @PostMapping
+    public void createUser(@RequestBody Users user){
+        userRepository.save(user);
     }
 }

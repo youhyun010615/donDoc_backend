@@ -25,5 +25,8 @@ public class FarmRepository {
         ));
     }
 
-
+    public void save(Farms farm) {
+        String sql = "INSERT INTO farms (name, created_at) VALUES (?, ?)";
+        jdbcTemplate.update(sql, farm.getName(), farm.getCreatedAt());
+    }
 }

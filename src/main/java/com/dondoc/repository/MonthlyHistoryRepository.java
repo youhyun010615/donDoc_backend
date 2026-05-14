@@ -24,4 +24,9 @@ public class MonthlyHistoryRepository {
                 rs.getInt("house_level")
         ));
     }
+
+    public void save(MonthlyHistory monthlyHistory) {
+        String sql = "INSERT INTO monthly_history (user_id, target_month, avg_ratio, house_level) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, monthlyHistory.getUserId(), monthlyHistory.getTargetMonth(), monthlyHistory.getAvgRatio(), monthlyHistory.getHouseLevel());
+    }
 }
