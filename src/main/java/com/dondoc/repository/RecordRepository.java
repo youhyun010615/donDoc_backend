@@ -33,23 +33,4 @@ public class RecordRepository {
         ));
     }
 
-    public List<Categories> findAllCategories(){
-        String sql = "SELECT * FROM categories";
-        return jdbcTemplate.query(sql, (rs,rowNum) -> new Categories(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getString("icon"),
-                rs.getString("type")
-        ));
-    }
-    public List<MonthlyHistory> findAllMonthlyHistory(){
-        String sql = "SELECT * FROM monthly_history";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new MonthlyHistory(
-                rs.getLong("id"),
-                rs.getLong("user_id"),
-                rs.getObject("target_month", LocalDate.class),
-                rs.getFloat("avg_ratio"),
-                rs.getInt("house_level")
-        ));
-    }
 }
