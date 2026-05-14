@@ -1,8 +1,6 @@
 package com.dondoc.repository;
 
-import com.dondoc.dto.Categories;
-import com.dondoc.dto.MonthlyHistory;
-import com.dondoc.dto.Records;
+import com.dondoc.entity.Record;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,9 +17,9 @@ public class RecordRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Records> findAll(){
+    public List<Record> findAll(){
         String sql = "SELECT * FROM records";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new Records(
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Record(
                 rs.getLong("id"),
                 rs.getLong("user_id"),
                 rs.getLong("category_id"),
@@ -33,7 +31,7 @@ public class RecordRepository {
         ));
     }
 
-    public void save(Records record) {
+    public void save(Record record) {
         String sql = "INSERT INTO records (user_id, category_id, amount, description, memo, record_date, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, record.getUserId(), record.getCategoryId(), record.getAmount(), record.getDescription(), record.getMemo(), record.getRecordDate(), record.getCreatedAt());
     }

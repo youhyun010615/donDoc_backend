@@ -1,6 +1,6 @@
 package com.dondoc.repository;
 
-import com.dondoc.dto.Categories;
+import com.dondoc.entity.Category;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +13,9 @@ public class CategoryRepository {
 
     public CategoryRepository(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
-    public List<Categories> findAll(){
+    public List<Category> findAll(){
         String sql = "SELECT * FROM categories";
-        return jdbcTemplate.query(sql, (rs,rowNum) -> new Categories(
+        return jdbcTemplate.query(sql, (rs,rowNum) -> new Category(
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("icon"),
@@ -23,7 +23,7 @@ public class CategoryRepository {
         ));
     }
 
-    public void save(Categories category) {
+    public void save(Category category) {
         String sql = "INSERT INTO categories (name, icon, type) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, category.getName(), category.getIcon(), category.getType());
     }

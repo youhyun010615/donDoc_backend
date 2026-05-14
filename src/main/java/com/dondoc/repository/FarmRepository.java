@@ -1,6 +1,6 @@
 package com.dondoc.repository;
 
-import com.dondoc.dto.Farms;
+import com.dondoc.entity.Farm;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,16 +16,16 @@ public class FarmRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Farms> findAll(){
+    public List<Farm> findAll(){
         String sql = "SELECT * FROM farms";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new Farms(
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Farm(
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getObject("created_at", LocalDateTime.class)
         ));
     }
 
-    public void save(Farms farm) {
+    public void save(Farm farm) {
         String sql = "INSERT INTO farms (name, created_at) VALUES (?, ?)";
         jdbcTemplate.update(sql, farm.getName(), farm.getCreatedAt());
     }

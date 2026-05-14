@@ -1,8 +1,8 @@
 package com.dondoc.controller;
 
-import com.dondoc.dto.Categories;
-import com.dondoc.dto.MonthlyHistory;
-import com.dondoc.dto.Records;
+import com.dondoc.entity.Category;
+import com.dondoc.entity.MonthlyHistory;
+import com.dondoc.entity.Record;
 import com.dondoc.repository.CategoryRepository;
 import com.dondoc.repository.MonthlyHistoryRepository;
 import com.dondoc.repository.RecordRepository;
@@ -25,12 +25,12 @@ public class RecordController {
     }
 
     @GetMapping
-    public List<Records> getRecords() {
+    public List<Record> getRecords() {
         return recordRepository.findAll();
     }
 
     @GetMapping("/categories")
-    public List<Categories> getCategories() {
+    public List<Category> getCategories() {
         return categoryRepository.findAll();
     }
 
@@ -40,12 +40,12 @@ public class RecordController {
     }
 
     @PostMapping
-    public void createRecord(@RequestBody Records record){
+    public void createRecord(@RequestBody Record record){
         recordRepository.save(record);
     }
 
     @PostMapping("/categories")
-    public void createCategory(@RequestBody Categories category){
+    public void createCategory(@RequestBody Category category){
         categoryRepository.save(category);
     }
 
