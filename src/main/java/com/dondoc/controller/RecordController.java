@@ -6,9 +6,7 @@ import com.dondoc.dto.Records;
 import com.dondoc.repository.CategoryRepository;
 import com.dondoc.repository.MonthlyHistoryRepository;
 import com.dondoc.repository.RecordRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,20 @@ public class RecordController {
     @GetMapping("/monthly-history")
     public List<MonthlyHistory> getMonthlyHistory() {
         return monthlyHistoryRepository.findAll();
+    }
+
+    @PostMapping
+    public void createRecord(@RequestBody Records record){
+        recordRepository.save(record);
+    }
+
+    @PostMapping("/categories")
+    public void createCategory(@RequestBody Categories category){
+        categoryRepository.save(category);
+    }
+
+    @PostMapping("/monthly-history")
+    public void createMonthlyHistory(@RequestBody MonthlyHistory monthlyHistory){
+        monthlyHistoryRepository.save(monthlyHistory);
     }
 }

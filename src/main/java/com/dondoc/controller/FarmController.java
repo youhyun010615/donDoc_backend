@@ -4,9 +4,8 @@ import com.dondoc.dto.FarmMembers;
 import com.dondoc.dto.Farms;
 import com.dondoc.repository.FarmMemberRepository;
 import com.dondoc.repository.FarmRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -30,4 +29,16 @@ public class FarmController {
     public List<FarmMembers> getFarmMembers() {
         return farmMemberRepository.findAll();
     }
+
+    @PostMapping
+    public void createFarm(@RequestBody Farms farm){
+        farmRepository.save(farm);
+    }
+
+    @PostMapping("/members")
+    public void createFarmMember(@RequestBody FarmMembers farmMember){
+        farmMemberRepository.save(farmMember);
+    }
+
+
 }
